@@ -1,2 +1,3 @@
 # SudokuSolver
- 
+
+A School project
