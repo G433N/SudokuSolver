@@ -15,27 +15,22 @@ public class SheetGUI extends Frame{
 		
 		elements = new ElementGUI[a.getMax()];
 		
-		System.out.println(elements.length);
-		
 		for (int i = 1; i <= elements.length; i++) {
 			
 			elements[i - 1] = new ElementGUI(a.getX(i) * 50, a.getY(i) * 50);
 			
-			System.out.println("X: " + a.getX(i) + " Y: " + a.getY(i));
-			
 			add(elements[i - 1]);
 		}
 			
-		
-		setSize(500, 500);
+		this.setSize(200, 200);
 				
-		setLayout(null);
+		this.setLayout(null);
 				
-		setVisible(true);
+		this.setVisible(true);
 		
 	}
 	
-	public int[] getSheet() {
+	public int[] getSheet() { // TODO : Next step
 		return null;
 	}
 	
