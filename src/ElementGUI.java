@@ -29,7 +29,7 @@ public class ElementGUI extends Button{
 		);
 	}
 
-	private void setLabel(int num2) {
+	void setLabel(int num2) {
 		
 		this.setLabel(Integer.toString(num2));
 		
