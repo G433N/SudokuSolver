@@ -11,7 +11,7 @@ public class ElementGUI extends Button{
 		
 		this.setLabel(num);
 		
-		this.setBounds(10 + x,30 + y, 30, 30);
+		this.setBounds(x, y, 30, 30);
 		
 		this.addActionListener(new ActionListener() {
 

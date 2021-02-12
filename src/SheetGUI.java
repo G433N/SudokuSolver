@@ -7,7 +7,7 @@ public class SheetGUI extends Frame{
 	
 	ElementGUI[] elements;
 	
-	SheetGUI(int size) {
+	SheetGUI(int size, int x, int y) {
 		
 		this.size = size;
 		
@@ -17,12 +17,12 @@ public class SheetGUI extends Frame{
 		
 		for (int i = 1; i <= elements.length; i++) {
 			
-			elements[i - 1] = new ElementGUI(a.getX(i) * 50, a.getY(i) * 50);
+			elements[i - 1] = new ElementGUI(x + a.getX(i) * 50, y + a.getY(i) * 50);
 			
 			add(elements[i - 1]);
 		}
 			
-		this.setSize(200, 200);
+		this.setSize(230, 210);
 				
 		this.setLayout(null);
 				
