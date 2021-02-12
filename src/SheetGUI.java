@@ -28,6 +28,8 @@ public class SheetGUI extends Frame{
 				
 		this.setVisible(true);
 		
+		this.setTitle("Sudoku");
+		
 	}
 	
 	void resetSheet() {
