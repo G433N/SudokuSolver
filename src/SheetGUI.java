@@ -22,7 +22,7 @@ public class SheetGUI extends Frame{
 			add(elements[i - 1]);
 		}
 			
-		this.setSize(230, 210);
+		this.setSize(500, 500);
 				
 		this.setLayout(null);
 				
