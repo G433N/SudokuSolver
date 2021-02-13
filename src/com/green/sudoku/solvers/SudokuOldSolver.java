@@ -14,7 +14,6 @@ public class SudokuOldSolver {
         this.sudoku = sudoku;
     }
 
-
     // Setter and Getters
     public void setValue(int x, int y, int newValue) {
         this.sudoku[y - 1][x - 1] = newValue;
