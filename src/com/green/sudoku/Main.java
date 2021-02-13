@@ -1,28 +1,29 @@
+package com.green.sudoku;
 import java.awt.*;
 import java.awt.event.*;
+
+import com.green.sudoku.gui.SudokuGUI;
+import com.green.sudoku.gui.buttons.ModeButton;
+import com.green.sudoku.solvers.SudokuOldSolver;
 
 	/*
 	 * TODO
 	 * Generate button - DONE
 	 * Variable for GUI distance - DONE
 	 * Exit function - DONE
+	 * Retractor - Done
+	 * Package - Done
 	 * 
-	 * Retractor
+	 * Brute force solving - Next Step
 	 * 
-	 * Package
-	 * 
-	 * Brute force solving
-	 * 
-	 * Fancy solving
-	 * 
-	 * Research Sudoku theory 
-	 * 
+	 * Rule solving
 	 */
 
-public class SudokuGUI {
+public class Main {
 	
 	// Data
-	static SheetGUI GUI;
+	
+	static SudokuGUI GUI;
 	
 	// Margin
 	final static int gridSize = 9;
@@ -35,10 +36,13 @@ public class SudokuGUI {
 	// Mode
 	
 	final static String[] modes = {"Old", "Brute", "Rule"};
+	
+	// Buttons
+	
 	static ModeButton modeButton = new ModeButton(gridXMargin, 3 * gridYMargin + (gridSize + 1) * elementDistance, 2 * elementDistance, emlementSize, modes);
 	
-	
 	// Temp
+	
 	static int[][] hardCodedSheet = {
 				{0, 9, 6, 2, 0, 8, 0, 7, 5, },
 				{2, 0, 0, 7, 5, 3, 0, 1, 0, },
@@ -51,10 +55,11 @@ public class SudokuGUI {
 				{9, 0, 0, 3, 7, 4, 6, 0, 1, },
 			};
 	
-	
 	public static void main(String[] args) {
 		
-		GUI = new SheetGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
+		// Probalby gonna do something fancier later TODO
+		
+		GUI = new SudokuGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
 		
 		GUI.add(buildSolveButton(gridXMargin, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
@@ -64,7 +69,32 @@ public class SudokuGUI {
 		
 		GUI.add(modeButton);
 	}
-
+	
+	static void solveSudoku(int[][] sheet) {
+		
+		switch(modeButton.getMode()) {
+		
+			case "Old":
+				SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet);
+				sudokuOldSolver.solve();
+				GUI.setSheet(sheet);
+				break;
+				
+			case "Brute":
+				System.out.println("WIP");
+				break;
+				
+			case "Rule":
+				System.out.println("Maybe comming later");
+				System.out.println("Would have the ability to add custom rules");
+				break;
+				
+			default:
+				System.out.println("An error has occurred, you shouldn't see this!");
+		}
+	}
+	
+	// Stock buttons // Will probably do something fancier TODO
 	
 	static Button buildSolveButton(int x, int y, int xSize, int ySize) {
 		
@@ -126,31 +156,4 @@ public class SudokuGUI {
 	}
 	
 	
-
-	static void solveSudoku(Sheet sheet) {
-		
-		switch(modeButton.getMode()) {
-		
-			case "Old":
-				SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet.elements);
-				
-				sudokuOldSolver.solve();
-				
-				GUI.setSheet(sheet.elements);
-				
-				break;
-			case "Brute":
-				System.out.println("WIP");
-				break;
-			case "Rule":
-				System.out.println("Maybe comming later");
-				System.out.println("Would have the ability to add custom rules");
-				break;
-			default:
-				System.out.println("An error has occurred, you shouldn't see this!");
-		}
-		
-		
-		
-	}
 }	

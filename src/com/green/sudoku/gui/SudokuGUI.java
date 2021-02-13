@@ -1,15 +1,18 @@
+package com.green.sudoku.gui;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.green.sudoku.math.ArrayLooper2D;
+
 @SuppressWarnings("serial")
-public class SheetGUI extends Frame{
+public class SudokuGUI extends Frame{
 	
 	final int size;
 	
 	ElementGUI[] elements;
 	
-	SheetGUI(int gridSize, int x, int y, int emlementSize, int elementDistance, int xSize, int ySize) {
+	public SudokuGUI(int gridSize, int x, int y, int emlementSize, int elementDistance, int xSize, int ySize) {
 		
 		this.size = gridSize;
 		
@@ -40,7 +43,7 @@ public class SheetGUI extends Frame{
 		
 	}
 	
-	void setSheet(int[][] elements) {
+	public void setSheet(int[][] elements) {
 		
 			ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
@@ -53,7 +56,7 @@ public class SheetGUI extends Frame{
 		
 	}
 	
-	void resetSheet() {
+	public void resetSheet() {
 		for (int i = 0; i < elements.length; i++) {
 			
 			this.elements[i].num = 0;
@@ -62,7 +65,7 @@ public class SheetGUI extends Frame{
 		}
 	}
 	
-	Sheet getSheet() { 
+	public int[][] getSheet() { 
 		
 		int[][] result = new int[this.size][size];
 		
@@ -74,7 +77,7 @@ public class SheetGUI extends Frame{
 			
 		}
 		
-		return new Sheet(result);
+		return result;
 	}
 	
 }

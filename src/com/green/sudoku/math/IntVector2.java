@@ -1,3 +1,4 @@
+package com.green.sudoku.math;
 public class IntVector2 {
 
     public int x;

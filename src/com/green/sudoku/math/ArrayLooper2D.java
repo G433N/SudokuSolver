@@ -1,3 +1,4 @@
+package com.green.sudoku.math;
 
 public class ArrayLooper2D {
 	

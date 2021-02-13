@@ -1,3 +1,4 @@
+package com.green.sudoku.gui.buttons;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,7 @@ public class ModeButton extends Button{
 	String[] modes;
 	int currentMode = 0;
 	
-	ModeButton(int x, int y, int xSize, int ySize, String[] modes) {
+	public ModeButton(int x, int y, int xSize, int ySize, String[] modes) {
 		
 		this.modes = modes;
 		
@@ -31,7 +32,7 @@ public class ModeButton extends Button{
 		
 	}
 	
-	String getMode() {
+	public String getMode() {
 		return modes[currentMode];
 	}
 

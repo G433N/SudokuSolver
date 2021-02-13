@@ -1,6 +1,9 @@
+package com.green.sudoku.solvers;
+
+import com.green.sudoku.math.IntVector2;
 
 public class SudokuOldSolver {
-    // TODO : Comment
+
     int[][] sudoku; // First is y second is x;
 
     private final static int[] VALUES = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -81,9 +84,6 @@ public class SudokuOldSolver {
 
             int quadrantX = (int) Math.ceil((float)(x + 1) / 3f);
             boolean b = true;
-
-            //System.out.println("x = " + quadrantX + " y = " + quadrantY);
-
 
             for (int r : row) {
                 if (r == value) {
@@ -207,8 +207,6 @@ public class SudokuOldSolver {
 
             if (stop || maxTries < tries) solving = false;
         }
-
-        System.out.println("Done!!!");
     }
 
     public void solveQuadrant(int x, int y) {

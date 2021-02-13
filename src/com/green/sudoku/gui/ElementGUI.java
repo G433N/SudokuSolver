@@ -1,12 +1,13 @@
+package com.green.sudoku.gui;
 import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class ElementGUI extends Button{
 
-	int num;
+	public int num;
 	
-	ElementGUI(int x, int y, int size) {
+	public ElementGUI(int x, int y, int size) {
 		
 		this.num = 0;
 		
@@ -29,9 +30,9 @@ public class ElementGUI extends Button{
 		);
 	}
 
-	void setLabel(int num2) {
+	public void setLabel(int num) {
 		
-		this.setLabel(Integer.toString(num2));
+		this.setLabel(Integer.toString(num));
 		
 	}	
 }
