@@ -7,6 +7,10 @@ import java.awt.event.*;
 	 * Variable for GUI distance - DONE
 	 * Exit function - DONE
 	 * 
+	 * Retractor
+	 * 
+	 * Package
+	 * 
 	 * Brute force solving
 	 * 
 	 * Fancy solving
@@ -15,10 +19,12 @@ import java.awt.event.*;
 	 * 
 	 */
 
-public class Sudoku {
+public class SudokuGUI {
 	
+	// Data
 	static SheetGUI GUI;
 	
+	// Margin
 	final static int gridSize = 9;
 	final static int gridXMargin = 20;
 	final static int gridYMargin = 20;
@@ -26,6 +32,13 @@ public class Sudoku {
 	final static int emlementSize = 30;
 	final static int elementDistance = 30;
 	
+	// Mode
+	
+	final static String[] modes = {"Old", "Brute", "Rule"};
+	static ModeButton modeButton = new ModeButton(gridXMargin, 3 * gridYMargin + (gridSize + 1) * elementDistance, 2 * elementDistance, emlementSize, modes);
+	
+	
+	// Temp
 	static int[][] hardCodedSheet = {
 				{0, 9, 6, 2, 0, 8, 0, 7, 5, },
 				{2, 0, 0, 7, 5, 3, 0, 1, 0, },
@@ -48,6 +61,8 @@ public class Sudoku {
 		GUI.add(buildResetButton(gridXMargin + 2 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
 		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
+		
+		GUI.add(modeButton);
 	}
 
 	
@@ -110,13 +125,32 @@ public class Sudoku {
 		return button;
 	}
 	
+	
+
 	static void solveSudoku(Sheet sheet) {
 		
-		SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet.elements);
+		switch(modeButton.getMode()) {
 		
-		sudokuOldSolver.solve();
+			case "Old":
+				SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet.elements);
+				
+				sudokuOldSolver.solve();
+				
+				GUI.setSheet(sheet.elements);
+				
+				break;
+			case "Brute":
+				System.out.println("WIP");
+				break;
+			case "Rule":
+				System.out.println("Maybe comming later");
+				System.out.println("Would have the ability to add custom rules");
+				break;
+			default:
+				System.out.println("An error has occurred, you shouldn't see this!");
+		}
 		
-		GUI.setSheet(sheet.elements);
+		
 		
 	}
 }	
