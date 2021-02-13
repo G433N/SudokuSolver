@@ -7,6 +7,7 @@ import java.awt.event.*;
 	 * Variable for GUI distance 
 	 * Exit function - DONE
 	 * Research Sudoku theory 
+	 * And more
 	 */
 
 public class Sudoku {
