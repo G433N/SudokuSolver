@@ -4,10 +4,15 @@ import java.awt.event.*;
 	/*
 	 * TODO
 	 * Generate button - DONE
-	 * Variable for GUI distance 
+	 * Variable for GUI distance - DONE
 	 * Exit function - DONE
+	 * 
+	 * Brute force solving
+	 * 
+	 * Fancy solving
+	 * 
 	 * Research Sudoku theory 
-	 * And more
+	 * 
 	 */
 
 public class Sudoku {
@@ -32,10 +37,7 @@ public class Sudoku {
 		
 		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 	}
-	
-	static void solveSudoku(Sheet sheet) {
-		sheet.println();
-	}
+
 	
 	static Button buildSolveButton(int x, int y, int xSize, int ySize) {
 		
@@ -48,8 +50,9 @@ public class Sudoku {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sheet sheet = new Sheet(GUI.getSheet());
+				Sheet sheet = GUI.getSheet();
 				solveSudoku(sheet);
+				System.out.println("\nWIP");
 				
 			}
 		});
@@ -69,6 +72,7 @@ public class Sudoku {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				GUI.resetSheet();
+				System.out.println("Reset");
 				
 			}
 		});
@@ -87,11 +91,15 @@ public class Sudoku {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				GUI.resetSheet();
+				System.out.println("WIP");
 				
 			}
 		});
 		
 		return button;
+	}
+	
+	static void solveSudoku(Sheet sheet) {
+		sheet.println();
 	}
 }	
