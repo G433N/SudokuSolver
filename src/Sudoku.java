@@ -1,7 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
 
-public class Main {
+	/*
+	 * TODO
+	 * Generate button - DONE
+	 * Variable for GUI distance 
+	 * Exit function - DONE
+	 * Research Sudoku theory 
+	 */
+
+public class Sudoku {
 	
 	static SheetGUI sheetGUI;
 	
@@ -12,6 +20,8 @@ public class Main {
 		sheetGUI.add(buildSolveButton());
 		
 		sheetGUI.add(buildResetButton());
+		
+		sheetGUI.add(buildGenerateButton());
 	}
 	
 	static void solveSudoku(Sheet sheet) {
@@ -38,11 +48,30 @@ public class Main {
 		return solveButton;
 	}
 	
-static Button buildResetButton() {
+	static Button buildResetButton() {
 		
 		Button resetButton = new Button("Reset");
 		
-		resetButton.setBounds(40 + 80 + 50, 10 * 50, 80, 30);  
+		resetButton.setBounds(40 + 80 + 15, 10 * 50, 80, 30);  
+		
+		resetButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				sheetGUI.resetSheet();
+				
+			}
+		});
+		
+		return resetButton;
+	}
+	
+	static Button buildGenerateButton() {
+		
+		Button resetButton = new Button("Generate");
+		
+		resetButton.setBounds(40 + 80*2 + 15 * 2, 10 * 50, 80, 30);  
 		
 		resetButton.addActionListener(new ActionListener() {
 

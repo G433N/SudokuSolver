@@ -1,6 +1,9 @@
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+@SuppressWarnings("serial")
 public class SheetGUI extends Frame{
 	
 	final int size;
@@ -21,6 +24,12 @@ public class SheetGUI extends Frame{
 			
 			add(elements[i - 1]);
 		}
+		
+		addWindowListener(new WindowAdapter(){  
+            public void windowClosing(WindowEvent e) {  
+                dispose();  
+            }  
+        });  
 			
 		this.setSize(500, 600);
 				

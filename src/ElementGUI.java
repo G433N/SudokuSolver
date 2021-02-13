@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class ElementGUI extends Button{
 
 	int num;
@@ -23,7 +24,6 @@ public class ElementGUI extends Button{
 					if (num == 10) num = 0;
 					
 					setLabel(num);
-					
 				}
 			}
 		);
@@ -33,6 +33,5 @@ public class ElementGUI extends Button{
 		
 		this.setLabel(Integer.toString(num2));
 		
-	}
-	
+	}	
 }
