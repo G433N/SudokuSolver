@@ -2,6 +2,13 @@ package com.green.sudoku.solvers;
 
 import com.green.sudoku.math.IntVector2;
 
+
+	/*
+	 * An old project I made some time ago.
+	 * Only works for easy sudokus.
+	 */
+
+
 public class SudokuOldSolver {
 
     int[][] sudoku; // First is y second is x;
@@ -15,6 +22,7 @@ public class SudokuOldSolver {
     }
 
     // Setter and Getters
+    
     public void setValue(int x, int y, int newValue) {
         this.sudoku[y - 1][x - 1] = newValue;
     }
