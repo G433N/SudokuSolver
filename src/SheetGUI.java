@@ -10,9 +10,9 @@ public class SheetGUI extends Frame{
 	
 	ElementGUI[] elements;
 	
-	SheetGUI(int size, int x, int y) {
+	SheetGUI(int gridSize, int x, int y, int emlementSize, int elementDistance, int xSize, int ySize) {
 		
-		this.size = size;
+		this.size = gridSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
@@ -20,7 +20,7 @@ public class SheetGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			elements[i - 1] = new ElementGUI(x + a.getX(i) * 50, y + a.getY(i) * 50);
+			elements[i - 1] = new ElementGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize);
 			
 			add(elements[i - 1]);
 		}
@@ -31,7 +31,7 @@ public class SheetGUI extends Frame{
             }  
         });  
 			
-		this.setSize(500, 600);
+		this.setSize(xSize, ySize);
 				
 		this.setLayout(null);
 				

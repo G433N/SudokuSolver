@@ -12,78 +12,86 @@ import java.awt.event.*;
 
 public class Sudoku {
 	
-	static SheetGUI sheetGUI;
+	static SheetGUI GUI;
+	
+	final static int gridSize = 9;
+	final static int gridXMargin = 20;
+	final static int gridYMargin = 20;
+	
+	final static int emlementSize = 30;
+	final static int elementDistance = 30;
+	
 	
 	public static void main(String[] args) {
 		
-		sheetGUI = new SheetGUI(9, 40, 40);
+		GUI = new SheetGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
 		
-		sheetGUI.add(buildSolveButton());
+		GUI.add(buildSolveButton(gridXMargin, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
-		sheetGUI.add(buildResetButton());
+		GUI.add(buildResetButton(gridXMargin + 2 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
-		sheetGUI.add(buildGenerateButton());
+		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 	}
 	
 	static void solveSudoku(Sheet sheet) {
 		sheet.println();
 	}
 	
-	static Button buildSolveButton() {
+	static Button buildSolveButton(int x, int y, int xSize, int ySize) {
 		
-		Button solveButton = new Button("Solve");
+		Button button = new Button("Solve");
 		
-		solveButton.setBounds(40, 10 * 50, 80, 30);  
+		button.setBounds(x, y, xSize, ySize);  
 		
-		solveButton.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sheet sheet = new Sheet(sheetGUI.getSheet());
+				Sheet sheet = new Sheet(GUI.getSheet());
 				solveSudoku(sheet);
 				
 			}
 		});
 		
-		return solveButton;
+		return button;
 	}
 	
-	static Button buildResetButton() {
+	static Button buildResetButton(int x, int y, int xSize, int ySize) {
 		
-		Button resetButton = new Button("Reset");
+		Button button = new Button("Reset");
 		
-		resetButton.setBounds(40 + 80 + 15, 10 * 50, 80, 30);  
+		button.setBounds(x, y, xSize, ySize);
 		
-		resetButton.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				sheetGUI.resetSheet();
+				GUI.resetSheet();
 				
 			}
 		});
 		
-		return resetButton;
+		return button;
 	}
 	
-	static Button buildGenerateButton() {
+	static Button buildGenerateButton(int x, int y, int xSize, int ySize) {
 		
-		Button resetButton = new Button("Generate");
+		Button button = new Button("Generate");
 		
-		resetButton.setBounds(40 + 80*2 + 15 * 2, 10 * 50, 80, 30);  
+		button.setBounds(x, y, xSize, ySize);  
 		
-		resetButton.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				sheetGUI.resetSheet();
+				GUI.resetSheet();
 				
 			}
 		});
 		
-		return resetButton;
+		return button;
 	}
 }	

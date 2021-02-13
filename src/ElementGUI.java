@@ -6,13 +6,13 @@ public class ElementGUI extends Button{
 
 	int num;
 	
-	ElementGUI(int x, int y) {
+	ElementGUI(int x, int y, int size) {
 		
 		this.num = 0;
 		
 		this.setLabel(num);
 		
-		this.setBounds(x, y, 30, 30);
+		this.setBounds(x, y, size, size);
 		
 		this.addActionListener(new ActionListener() {
 
