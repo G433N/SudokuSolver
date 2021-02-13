@@ -1,5 +1,5 @@
 
-public class Sheet {
+public class Sheet { // Probably temporary
 	
 	final int size;
 	

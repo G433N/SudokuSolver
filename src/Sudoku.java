@@ -26,6 +26,18 @@ public class Sudoku {
 	final static int emlementSize = 30;
 	final static int elementDistance = 30;
 	
+	static int[][] hardCodedSheet = {
+				{0, 9, 6, 2, 0, 8, 0, 7, 5, },
+				{2, 0, 0, 7, 5, 3, 0, 1, 0, },
+				{0, 5, 0, 0, 0, 6, 0, 0, 2, },
+				{0, 7, 0, 0, 3, 1, 0, 9, 0, },
+				{0, 0, 0, 0, 0, 0, 5, 2, 0, },
+				{5, 0, 0, 0, 2, 0, 1, 6, 3, },
+				{0, 1, 0, 9, 0, 0, 0, 3, 0, },
+				{0, 0, 3, 0, 8, 0, 2, 0, 9, },
+				{9, 0, 0, 3, 7, 4, 6, 0, 1, },
+			};
+	
 	
 	public static void main(String[] args) {
 		
@@ -50,9 +62,7 @@ public class Sudoku {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sheet sheet = GUI.getSheet();
-				solveSudoku(sheet);
-				System.out.println("\nWIP");
+				solveSudoku(GUI.getSheet());
 				
 			}
 		});
@@ -91,6 +101,7 @@ public class Sudoku {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				GUI.setSheet(hardCodedSheet);
 				System.out.println("WIP");
 				
 			}
@@ -100,6 +111,12 @@ public class Sudoku {
 	}
 	
 	static void solveSudoku(Sheet sheet) {
-		sheet.println();
+		
+		SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet.elements);
+		
+		sudokuOldSolver.solve();
+		
+		GUI.setSheet(sheet.elements);
+		
 	}
 }	

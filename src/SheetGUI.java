@@ -41,11 +41,24 @@ public class SheetGUI extends Frame{
 		
 	}
 	
+	void setSheet(int[][] elements) {
+		
+			ArrayLooper2D a = new ArrayLooper2D(this.size);
+		
+			for (int i = 1; i <= a.getMax(); i++) {
+			
+			this.elements[i - 1].num = elements[a.getY(i)][a.getX(i)];
+			
+			this.elements[i - 1].setLabel(this.elements[i - 1].num);
+		}
+		
+	}
+	
 	void resetSheet() {
 		for (int i = 0; i < elements.length; i++) {
 			
-			elements[i].num = 0;
-			elements[i].setLabel(0);
+			this.elements[i].num = 0;
+			this.elements[i].setLabel(elements[i].num);
 			
 		}
 	}
