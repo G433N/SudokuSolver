@@ -7,7 +7,7 @@ import com.green.sudoku.gui.buttons.ModeButton;
 import com.green.sudoku.solvers.SudokuOldSolver;
 
 	/*
-	 * TODO
+	 * TODO "Roadmap"
 	 * Generate button - DONE
 	 * Variable for GUI distance - DONE
 	 * Exit function - DONE
@@ -57,7 +57,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		// Probalby gonna do something fancier later TODO
+		// Probably gonna do something fancier later TODO Stock buttons margins
 		
 		GUI = new SudokuGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
 		
@@ -94,7 +94,7 @@ public class Main {
 		}
 	}
 	
-	// Stock buttons // Will probably do something fancier TODO
+	// Stock buttons // Will probably do something fancier TODO Stock buttons
 	
 	static Button buildSolveButton(int x, int y, int xSize, int ySize) {
 		
