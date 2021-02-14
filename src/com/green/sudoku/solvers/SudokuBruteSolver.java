@@ -11,7 +11,12 @@ public class SudokuBruteSolver { //
 	 *  The loop should be able to move forward and backwards and to add and remove from the possibilities
 	 *  
 	 *  If i == 0   throw error probably unsolvable 
-	 *  If i == size^2 + 1	Sudoku is solved
+	 *  If i == size^2 + 1	Sudoku is probably solved // It works in my head at least
+	 *  
+	 *  Make 2 functions for column, row, box = x
+	 *  
+	 *  Remove possibility from every x
+	 *  Add possibility from every x
 	 *  
 	 */
 }
