@@ -96,13 +96,12 @@ public class Main {
 				System.out.println("Maybe comming later");
 				System.out.println("Would have the ability to add custom rules");
 				break;
-				
 			default:
 				System.out.println("An error has occurred, you shouldn't see this!");
 		}
 	}
 	
-	// Temp functions
+	// Temporary functions
 	
 	static void printSudoku(int[][] sheet) {
 		
