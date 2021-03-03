@@ -89,6 +89,7 @@ public class Main {
 			case "Brute":
 				SudokuBruteSolver sudokuBruteSolver = new SudokuBruteSolver(sheet, gridSize);
 				sudokuBruteSolver.solve();
+				GUI.setSheet(sudokuBruteSolver.getResult());
 				break;
 				
 			case "Rule":
@@ -99,6 +100,23 @@ public class Main {
 			default:
 				System.out.println("An error has occurred, you shouldn't see this!");
 		}
+	}
+	
+	// Temp functions
+	
+	static void printSudoku(int[][] sheet) {
+		
+		for(int[] column : sheet) {
+			
+			System.out.println();
+			
+			for(int value : column) {
+				
+				System.out.print(value + "");
+				
+			}
+		}
+		
 	}
 	
 	// Stock buttons // Will probably do something fancier TODO Stock buttons
@@ -134,7 +152,6 @@ public class Main {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				GUI.resetSheet();
-				System.out.println("Reset");
 				
 			}
 		});
@@ -154,7 +171,6 @@ public class Main {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				GUI.setSheet(hardCodedSheet);
-				System.out.println("WIP");
 				
 			}
 		});
