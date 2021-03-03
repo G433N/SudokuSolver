@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 import com.green.sudoku.gui.SudokuGUI;
 import com.green.sudoku.gui.buttons.ModeButton;
-import com.green.sudoku.solvers.SudokuOldSolver;
+import com.green.sudoku.solvers.*;
 
 	/*
 	 * TODO "Roadmap"
@@ -16,7 +16,13 @@ import com.green.sudoku.solvers.SudokuOldSolver;
 	 * 
 	 * Brute force solving - Next Step
 	 * 
+	 * Make size global and static and final, no stupid dynamic size bitch
+	 * Clean-up
+	 * Commenting
+	 * 
 	 * Rule solving
+	 * 
+	 * U do commenting
 	 */
 
 public class Main {
@@ -35,7 +41,7 @@ public class Main {
 	
 	// Mode
 	
-	final static String[] modes = {"Old", "Brute", "Rule"};
+	final static String[] modes = {"Brute", "Old", "Rule"};
 	
 	// Buttons
 	
@@ -81,7 +87,8 @@ public class Main {
 				break;
 				
 			case "Brute":
-				System.out.println("WIP");
+				SudokuBruteSolver sudokuBruteSolver = new SudokuBruteSolver(sheet, gridSize);
+				sudokuBruteSolver.solve();
 				break;
 				
 			case "Rule":
