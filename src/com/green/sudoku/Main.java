@@ -2,7 +2,7 @@ package com.green.sudoku;
 import java.awt.*;
 import java.awt.event.*;
 
-import com.green.sudoku.brutesolver.*;
+
 import com.green.sudoku.gui.SudokuGUI;
 
 	/*
@@ -31,7 +31,7 @@ public class Main {
 	static SudokuGUI GUI;
 	
 	// Margin
-	final static int gridSize = 9; // Use this as global laterz
+	final static int gridSize = 9; // Use this as global later
 	final static int gridXMargin = 20;
 	final static int gridYMargin = 20;
 	
@@ -54,8 +54,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		// Probably gonna do something fancier later TODO Stock buttons margins
-		
 		GUI = new SudokuGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
 		
 		GUI.add(buildSolveButton(gridXMargin, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
@@ -63,7 +61,6 @@ public class Main {
 		GUI.add(buildResetButton(gridXMargin + 2 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
 		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
-		
 	}
 	
 	static void solveSudoku(int[][] sheet) {

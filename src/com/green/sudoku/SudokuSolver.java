@@ -1,6 +1,4 @@
-package com.green.sudoku.brutesolver;
-
-import java.util.ArrayList;
+package com.green.sudoku;
 
 import com.green.sudoku.math.ArrayLooper2D;
 
@@ -206,30 +204,6 @@ public class SudokuSolver { //
 			if (cell.value != 0) cell.solved = true;
 			
 			this.removeImpossibleValuesFromPoint(a.getX(i), a.getY(i));
-		}
-	}
-	
-	// Class for storage of possible values and if the cell is solved
-	private class Cell {
-		// store x and y too
-		int value;
-		ArrayList<Integer> possiblities;
-		boolean solved;
-		
-		
-		Cell(int size, int value) {
-			this.value = value;
-			this.possiblities = new ArrayList<>();
-			this.solved = false;
-			
-			for(int i = 1; i <= size; i++) possiblities.add(i);
-		}
-		
-		@SuppressWarnings("unchecked")
-		Cell(Cell cell) { // This should make a deep copy
-			this.value = cell.value;
-			this.possiblities = (ArrayList<Integer>) cell.possiblities.clone();
-			this.solved = cell.solved;
 		}
 	}
 }
