@@ -24,7 +24,7 @@ import com.green.sudoku.gui.SudokuGUI;
 	 * U do commenting
 	 */
 
-public class Main {
+public class Sudoku {
 	
 	// Data
 	

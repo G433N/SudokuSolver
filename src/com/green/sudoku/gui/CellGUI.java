@@ -3,11 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class ElementGUI extends Button{
+public class CellGUI extends Button{
 
 	public int num;
 	
-	public ElementGUI(int x, int y, int size) {
+	public CellGUI(int x, int y, int size) {
 		
 		this.num = 0;
 		
