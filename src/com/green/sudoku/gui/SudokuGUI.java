@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.green.sudoku.Cell;
 import com.green.sudoku.math.ArrayLooper2D;
 
 @SuppressWarnings("serial")
@@ -12,7 +13,7 @@ public class SudokuGUI extends Frame{
 	 * SudokuGUI is Class that creates a grid of ElementUI
 	 * with a specified size, to simulate a Sudoku sheet.
 	 * It also has the function to set, get and reset the sheet.
-	 * The sheet is stored as an int[][]
+	 * The sheet is stored as an CellGUI[][]
 	 */
 	
 	final int size;
@@ -29,7 +30,7 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			cellGrid[a.getY(i)][a.getX(i)] = new CellGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize);
+			cellGrid[a.getY(i)][a.getX(i)] = new CellGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize, a.getX(i), a.getY(i));
 			
 			add(cellGrid[a.getY(i)][a.getX(i)]);
 		}
@@ -51,17 +52,16 @@ public class SudokuGUI extends Frame{
 		
 	}
 	
-	public void setSheet(int[][] elements) {
+	public void setSheet(Cell[][] cells) {
 		
 		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			this.cellGrid[a.getY(i)][a.getX(i)].num = elements[a.getY(i)][a.getX(i)];
+			this.cellGrid[a.getY(i)][a.getX(i)].num = cells[a.getY(i)][a.getX(i)].value;
 			
 			this.cellGrid[a.getY(i)][a.getX(i)].setLabel(this.cellGrid[a.getY(i)][a.getX(i)].num);
 		}
-		
 	}
 	
 	public void resetSheet() {
@@ -76,16 +76,15 @@ public class SudokuGUI extends Frame{
 		}
 	}
 	
-	public int[][] getSheet() { 
+	public Cell[][] getSheet() { 
 		
-		int[][] result = new int[this.size][size];
+		Cell[][] result = new Cell[this.size][size];
 		
 		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			result [a.getY(i)][a.getX(i)] = this.cellGrid[a.getY(i)][a.getX(i)].num;
-			
+			result [a.getY(i)][a.getX(i)] = this.cellGrid[a.getY(i)][a.getX(i)].getCell();
 		}
 		
 		return result;

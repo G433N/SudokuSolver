@@ -5,17 +5,19 @@ import java.util.ArrayList;
 //Class for storage of possible values and if the cell is solved
 public class Cell {
 	// store x and y too
-	int value;
-	ArrayList<Integer> possiblities;
-	boolean solved;
+	public int value;
+	public int x;
+	public int y;
+	public ArrayList<Integer> possiblities;
+	public boolean solved;
 	
 	
-	Cell(int size, int value) {
+	public Cell(int value, int x, int y) {
 		this.value = value;
 		this.possiblities = new ArrayList<>();
 		this.solved = false;
 		
-		for(int i = 1; i <= size; i++) possiblities.add(i);
+		for(int i = 1; i <= Sudoku.gridSize; i++) possiblities.add(i);
 	}
 	
 	@SuppressWarnings("unchecked")

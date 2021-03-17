@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 
 import com.green.sudoku.gui.SudokuGUI;
+import com.green.sudoku.math.ArrayLooper2D;
 
 	/*
 	 * TODO "Roadmap"
@@ -63,9 +64,9 @@ public class Sudoku {
 		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 	}
 	
-	static void solveSudoku(int[][] sheet) {
+	static void solveSudoku(Cell[][] sheet) {
 		
-		SudokuSolver sudokuBruteSolver = new SudokuSolver(sheet, gridSize);
+		SudokuSolver sudokuBruteSolver = new SudokuSolver(sheet);
 		sudokuBruteSolver.solve();
 		GUI.setSheet(sudokuBruteSolver.getResult());
 	}
@@ -89,6 +90,17 @@ public class Sudoku {
 				
 			}
 		}
+	}
+	
+	static Cell[][] getHardCodedSheet() {
+		
+		int size = gridSize;
+		ArrayLooper2D a = new ArrayLooper2D(size);
+		Cell[][] result = new Cell[size][size];
+		
+		for (int i = 1; i <= a.getMax(); i++) result[a.getY(i)][a.getX(i)] = new Cell(hardCodedSheet[a.getY(i)][a.getX(i)], a.getX(i), a.getY(i));
+		
+		return result;
 	}
 	
 	// More buttons
@@ -157,7 +169,7 @@ public class Sudoku {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				GUI.setSheet(hardCodedSheet);
+				GUI.setSheet(getHardCodedSheet());
 				
 			}
 		});

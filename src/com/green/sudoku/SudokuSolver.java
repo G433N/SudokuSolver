@@ -13,10 +13,10 @@ public class SudokuSolver { //
 	Cell[][] cells;
 	Cell[][] cellsCopy;
 	
-	public SudokuSolver(int[][] sheet, int sheetSize) {
+	public SudokuSolver(Cell[][] sheet) {
 		
-		this.sheetSize = sheetSize;
-		this.cells = this.sheetToCells(sheet, this.sheetSize);
+		this.sheetSize = Sudoku.gridSize;
+		this.cells = sheet;
 		
 		this.constructStartSheet();
 		
@@ -62,33 +62,8 @@ public class SudokuSolver { //
 		}
 	}
 	
-	public int[][] getResult() {
-		return this.cellsToSheet(this.cells, this.sheetSize);
-	}
-	
-	private Cell[][] sheetToCells(int[][] sheet, int size) {
-		
-		Cell[][] result = new Cell[size][size];
-		ArrayLooper2D a = new ArrayLooper2D(size);
-		
-		for (int i = 1; i <= a.getMax(); i++) {
-			result[a.getY(i)][a.getX(i)] = new Cell(size, sheet[a.getY(i)][a.getX(i)]);
-		}
-		
-		return result;
-	}
-	
-	private int[][] cellsToSheet(Cell[][] cells, int size) {
-		
-		int[][] result = new int[size][size];
-		ArrayLooper2D a = new ArrayLooper2D(size);
-		
-		for (int i = 1; i <= a.getMax(); i++) {
-			result[a.getY(i)][a.getX(i)] = cells[a.getY(i)][a.getX(i)].value;
-		}
-		
-		return result;
-		
+	public Cell[][] getResult() {
+		return this.cells;
 	}
 	
  	private void removeImpossibleValuesFromPoint(int x, int y) {
