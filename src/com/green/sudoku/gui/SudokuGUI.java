@@ -17,7 +17,7 @@ public class SudokuGUI extends Frame{
 	
 	final int size;
 	
-	CellGUI[] cellGrid;
+	CellGUI[][] cellGrid;
 	
 	public SudokuGUI(int gridSize, int x, int y, int emlementSize, int elementDistance, int xSize, int ySize) {
 		
@@ -25,13 +25,13 @@ public class SudokuGUI extends Frame{
 		
 		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
-		cellGrid = new CellGUI[a.getMax()];
+		cellGrid = new CellGUI[this.size][this.size];
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			cellGrid[i - 1] = new CellGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize);
+			cellGrid[a.getY(i)][a.getX(i)] = new CellGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize);
 			
-			add(cellGrid[i - 1]);
+			add(cellGrid[a.getY(i)][a.getX(i)]);
 		}
 		
 		// Makes the window close when pressing "x"
@@ -57,19 +57,21 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			this.cellGrid[i - 1].num = elements[a.getY(i)][a.getX(i)];
+			this.cellGrid[a.getY(i)][a.getX(i)].num = elements[a.getY(i)][a.getX(i)];
 			
-			this.cellGrid[i - 1].setLabel(this.cellGrid[i - 1].num);
+			this.cellGrid[a.getY(i)][a.getX(i)].setLabel(this.cellGrid[a.getY(i)][a.getX(i)].num);
 		}
 		
 	}
 	
 	public void resetSheet() {
 		
-		for (int i = 0; i < cellGrid.length; i++) {
+		ArrayLooper2D a = new ArrayLooper2D(this.size);
+		
+		for (int i = 1; i <= a.getMax(); i++) {
 			
-			this.cellGrid[i].num = 0;
-			this.cellGrid[i].setLabel(cellGrid[i].num);
+			this.cellGrid[a.getY(i)][a.getX(i)].num = 0;
+			this.cellGrid[a.getY(i)][a.getX(i)].setLabel(cellGrid[a.getY(i)][a.getX(i)].num);
 			
 		}
 	}
@@ -82,7 +84,7 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			result [a.getY(i)][a.getX(i)] = this.cellGrid[i - 1 ].num;
+			result [a.getY(i)][a.getX(i)] = this.cellGrid[a.getY(i)][a.getX(i)].num;
 			
 		}
 		
