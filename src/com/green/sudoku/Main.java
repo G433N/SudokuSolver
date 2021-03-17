@@ -2,9 +2,8 @@ package com.green.sudoku;
 import java.awt.*;
 import java.awt.event.*;
 
+import com.green.sudoku.brutesolver.*;
 import com.green.sudoku.gui.SudokuGUI;
-import com.green.sudoku.gui.buttons.ModeButton;
-import com.green.sudoku.solvers.*;
 
 	/*
 	 * TODO "Roadmap"
@@ -32,33 +31,25 @@ public class Main {
 	static SudokuGUI GUI;
 	
 	// Margin
-	final static int gridSize = 9;
+	final static int gridSize = 9; // Use this as global laterz
 	final static int gridXMargin = 20;
 	final static int gridYMargin = 20;
 	
 	final static int emlementSize = 30;
 	final static int elementDistance = 30;
 	
-	// Mode
-	
-	final static String[] modes = {"Brute", "Old", "Rule"};
-	
-	// Buttons
-	
-	static ModeButton modeButton = new ModeButton(gridXMargin, 3 * gridYMargin + (gridSize + 1) * elementDistance, 2 * elementDistance, emlementSize, modes);
-	
-	// Temp
+	// Temporary
 	
 	static int[][] hardCodedSheet = {
-				{0, 9, 6, 2, 0, 8, 0, 7, 5, },
-				{2, 0, 0, 7, 5, 3, 0, 1, 0, },
-				{0, 5, 0, 0, 0, 6, 0, 0, 2, },
-				{0, 7, 0, 0, 3, 1, 0, 9, 0, },
-				{0, 0, 0, 0, 0, 0, 5, 2, 0, },
-				{5, 0, 0, 0, 2, 0, 1, 6, 3, },
-				{0, 1, 0, 9, 0, 0, 0, 3, 0, },
-				{0, 0, 3, 0, 8, 0, 2, 0, 9, },
-				{9, 0, 0, 3, 7, 4, 6, 0, 1, },
+				{3, 0, 7, 0, 0, 4, 1, 0, 0, },
+				{0, 0, 0, 0, 0, 6, 7, 5, 4, },
+				{0, 9, 4, 1, 0, 0, 0, 0, 3, },
+				{0, 3, 0, 0, 0, 2, 0, 0, 0, },
+				{0, 2, 8, 0, 0, 0, 0, 0, 1, },
+				{0, 0, 6, 8, 3, 1, 0, 0, 0, },
+				{2, 0, 0, 0, 0, 0, 3, 0, 7, },
+				{5, 0, 1, 0, 6, 0, 4, 0, 0, },
+				{0, 7, 0, 0, 0, 0, 0, 0, 6, },
 			};
 	
 	public static void main(String[] args) {
@@ -73,37 +64,23 @@ public class Main {
 		
 		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
 		
-		GUI.add(modeButton);
 	}
 	
 	static void solveSudoku(int[][] sheet) {
 		
-		switch(modeButton.getMode()) {
-		
-			case "Old":
-				SudokuOldSolver sudokuOldSolver = new SudokuOldSolver(sheet);
-				sudokuOldSolver.solve();
-				GUI.setSheet(sheet);
-				break;
-				
-			case "Brute":
-				SudokuBruteSolver sudokuBruteSolver = new SudokuBruteSolver(sheet, gridSize);
-				sudokuBruteSolver.solve();
-				GUI.setSheet(sudokuBruteSolver.getResult());
-				break;
-				
-			case "Rule":
-				System.out.println("Maybe comming later");
-				System.out.println("Would have the ability to add custom rules");
-				break;
-			default:
-				System.out.println("An error has occurred, you shouldn't see this!");
-		}
+		SudokuSolver sudokuBruteSolver = new SudokuSolver(sheet, gridSize);
+		sudokuBruteSolver.solve();
+		GUI.setSheet(sudokuBruteSolver.getResult());
 	}
 	
 	// Temporary functions
 	
 	static void printSudoku(int[][] sheet) {
+		
+		/*
+		 * Temporary function for debugging.
+		 * The function prints a sheet to the console.
+		 */
 		
 		for(int[] column : sheet) {
 			
@@ -115,12 +92,16 @@ public class Main {
 				
 			}
 		}
-		
 	}
 	
-	// Stock buttons // Will probably do something fancier TODO Stock buttons
+	// More buttons
 	
 	static Button buildSolveButton(int x, int y, int xSize, int ySize) {
+		
+		/*
+		 * Function for building the "solve" button.
+		 * That runs the solveSudoku function
+		 */
 		
 		Button button = new Button("Solve");
 		
@@ -141,6 +122,11 @@ public class Main {
 	
 	static Button buildResetButton(int x, int y, int xSize, int ySize) {
 		
+		/*
+		 * Function for building the "reset" button.
+		 * That runs the GUI.resetSheet function
+		 */
+		
 		Button button = new Button("Reset");
 		
 		button.setBounds(x, y, xSize, ySize);
@@ -160,6 +146,11 @@ public class Main {
 	
 	static Button buildGenerateButton(int x, int y, int xSize, int ySize) {
 		
+		/*
+		 * Function for building the "generate" button.
+		 * That sets the sheet to the variable hardCodedSheet sheet
+		 */
+		
 		Button button = new Button("Generate");
 		
 		button.setBounds(x, y, xSize, ySize);  
@@ -176,6 +167,4 @@ public class Main {
 		
 		return button;
 	}
-	
-	
 }	

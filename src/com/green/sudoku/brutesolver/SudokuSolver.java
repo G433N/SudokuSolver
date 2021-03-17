@@ -1,28 +1,10 @@
-package com.green.sudoku.solvers;
+package com.green.sudoku.brutesolver;
 
 import java.util.ArrayList;
 
 import com.green.sudoku.math.ArrayLooper2D;
 
-public class SudokuBruteSolver { // 
-	
-	/*	TODO SudokuBruteSolver planning
-	 *  Create a 2D Array of ArrayList with possible values
-	 *  Loop thru sheet and get all starting possibilities and deep copy them.
-	 *  
-	 *  Start a recursive loop for i between 1 -> size^2. Use ArrayLooper2D to get coordinates.
-	 *  
-	 *  The loop should be able to move forward and backwards and to add and remove from the possibilities
-	 *  
-	 *  If i == 0   throw error probably unsolvable 
-	 *  If i == size^2 + 1	Sudoku is probably solved // It works in my head at least
-	 *  
-	 *  Make 2 functions for column, row, box = x
-	 *  
-	 *  Remove possibility from every x
-	 *  Add possibility from every x
-	 *  
-	 */
+public class SudokuSolver { // 
 	
 	/* TODO SudokuBruteSolver roadmap	
 	 * 
@@ -33,7 +15,8 @@ public class SudokuBruteSolver { //
 	Cell[][] cells;
 	Cell[][] cellsCopy;
 	
-	public SudokuBruteSolver(int[][] sheet, int sheetSize) {
+	public SudokuSolver(int[][] sheet, int sheetSize) {
+		
 		this.sheetSize = sheetSize;
 		this.cells = this.sheetToCells(sheet, this.sheetSize);
 		
@@ -50,9 +33,11 @@ public class SudokuBruteSolver { //
 		
 		boolean solving = false;
 		boolean solved = true;
+		int maxLoops = 1000;
+		int loops = 0;
 		
 		
-		while (!solving) {
+		while (!solving && loops < maxLoops) {
 			
 			solved = true;
 			
@@ -75,6 +60,7 @@ public class SudokuBruteSolver { //
 			}
 			
 			if (solved) solving = true;
+			loops++;
 		}
 	}
 	
@@ -107,7 +93,7 @@ public class SudokuBruteSolver { //
 		
 	}
 	
- 	private void removeImpossibleValuesFromPoint(int x, int y) {// TODO Add boxes
+ 	private void removeImpossibleValuesFromPoint(int x, int y) {
 		
  		Cell cell = this.cells[y][x];
  		
@@ -147,7 +133,7 @@ public class SudokuBruteSolver { //
 		}
 	}
 	
-	private Cell[] getRow(int y) {
+	private Cell[] getRow(int y) { // Takes in parameter x and returns an array with
 		
 		final int size = this.sheetSize;
 		
@@ -171,8 +157,8 @@ public class SudokuBruteSolver { //
 	
 	private Cell[] getBox(int x, int y) {
 		
-		x = (int) (Math.ceil(((float)(x)+1)/3f)); // TODO Bad code / temp code
-		y = (int) (Math.ceil(((float)(y)+1)/3f));
+		x = (int) (Math.ceil(((float)(x)+1f)/3f)); // TODO Bad code / temp code
+		y = (int) (Math.ceil(((float)(y)+1f)/3f));
 		x = 3 * (x - 1);
 		y = 3 * (y - 1);
 		

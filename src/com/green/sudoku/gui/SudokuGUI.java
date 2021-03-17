@@ -8,6 +8,13 @@ import com.green.sudoku.math.ArrayLooper2D;
 @SuppressWarnings("serial")
 public class SudokuGUI extends Frame{
 	
+	/*
+	 * SudokuGUI is Class that creates a grid of ElementUI
+	 * with a specified size, to simulate a Sudoku sheet.
+	 * It also has the function to set, get and reset the sheet.
+	 * The sheet is stored as an int[][]
+	 */
+	
 	final int size;
 	
 	ElementGUI[] elements;
@@ -45,9 +52,9 @@ public class SudokuGUI extends Frame{
 	
 	public void setSheet(int[][] elements) {
 		
-			ArrayLooper2D a = new ArrayLooper2D(this.size);
+		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
-			for (int i = 1; i <= a.getMax(); i++) {
+		for (int i = 1; i <= a.getMax(); i++) {
 			
 			this.elements[i - 1].num = elements[a.getY(i)][a.getX(i)];
 			
@@ -57,6 +64,7 @@ public class SudokuGUI extends Frame{
 	}
 	
 	public void resetSheet() {
+		
 		for (int i = 0; i < elements.length; i++) {
 			
 			this.elements[i].num = 0;
