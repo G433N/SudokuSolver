@@ -4,21 +4,18 @@ import com.green.sudoku.math.ArrayLooper2D;
 
 public class SudokuSolver { // 
 	
-	/* TODO SudokuBruteSolver roadmap	
-	 * 
-	 */
-	
 	final int sheetSize;
-	final int boxSize = 3; // TODO Add to constructor
+	final int boxSize; 
 	Cell[][] cells;
 	Cell[][] cellsCopy;
 	
 	public SudokuSolver(Cell[][] sheet) {
 		
 		this.sheetSize = Sudoku.gridSize;
+		this.boxSize = Sudoku.boxSize;
 		this.cells = sheet;
 		
-		this.constructStartSheet();
+		this.sheetSetUp();
 		
 		this.cellsCopy = this.getCellsCopy();
 	}
@@ -41,7 +38,10 @@ public class SudokuSolver { //
 			
 			for (int i = 1; i <= a.getMax(); i++) {
 				
-				Cell cell = this.cells[a.getY(i)][a.getX(i)];
+				int x = a.getX(i);
+				int y = a.getY(i);
+				
+				Cell cell = this.cells[y][x];
 				
 				if (cell.solved) {
 					continue;
@@ -54,7 +54,7 @@ public class SudokuSolver { //
 					cell.solved = true;
 					cell.value = cell.possiblities.get(0);
 				}
-				this.removeImpossibleValuesFromPoint(a.getX(i), a.getY(i));
+				this.removeImpossibleValuesFromPoint(x, y);
 			}
 			
 			if (solved) solving = true;
@@ -66,9 +66,9 @@ public class SudokuSolver { //
 		return this.cells;
 	}
 	
- 	private void removeImpossibleValuesFromPoint(int x, int y) {
-		
- 		Cell cell = this.cells[y][x];
+ 	private void removeImpossibleValuesFromPoint(int x, int y) { // TODO Change name and take cell input
+ 		
+ 		Cell cell = cells[y][x];
  		
 		if (cell.value == 0) return;
 		
@@ -130,7 +130,7 @@ public class SudokuSolver { //
 	
 	private Cell[] getBox(int x, int y) {
 		
-		x = (int) (Math.ceil(((float)(x)+1f)/3f)); // TODO Bad code / temp code
+		x = (int) (Math.ceil(((float)(x)+1f)/3f)); // TODO Readability
 		y = (int) (Math.ceil(((float)(y)+1f)/3f));
 		x = 3 * (x - 1);
 		y = 3 * (y - 1);
@@ -167,18 +167,22 @@ public class SudokuSolver { //
 		return result;
 	}
 	
-	private void constructStartSheet() { // TODO WIP and new name
+	private void sheetSetUp() {
 		
 		final int size = this.sheetSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
-			Cell cell = this.cells[a.getY(i)][a.getX(i)];
+			
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			Cell cell = this.cells[y][x];
 			
 			if (cell.value != 0) cell.solved = true;
 			
-			this.removeImpossibleValuesFromPoint(a.getX(i), a.getY(i));
+			this.removeImpossibleValuesFromPoint(x ,y);
 		}
 	}
 }

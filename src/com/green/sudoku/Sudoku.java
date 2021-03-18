@@ -6,25 +6,6 @@ import java.awt.event.*;
 import com.green.sudoku.gui.SudokuGUI;
 import com.green.sudoku.math.ArrayLooper2D;
 
-	/*
-	 * TODO "Roadmap"
-	 * Generate button - DONE
-	 * Variable for GUI distance - DONE
-	 * Exit function - DONE
-	 * Retractor - Done
-	 * Package - Done
-	 * 
-	 * Brute force solving - Next Step
-	 * 
-	 * Make size global and static and final, no stupid dynamic size bitch
-	 * Clean-up
-	 * Commenting
-	 * 
-	 * Rule solving
-	 * 
-	 * U do commenting
-	 */
-
 public class Sudoku {
 	
 	// Data
@@ -32,12 +13,14 @@ public class Sudoku {
 	static SudokuGUI GUI;
 	
 	// Margin
-	final static int gridSize = 9; // Use this as global later
-	final static int gridXMargin = 20;
-	final static int gridYMargin = 20;
+	public final static int gridSize = 9;
+	public final static int boxSize = 3;
 	
-	final static int emlementSize = 30;
-	final static int elementDistance = 30;
+	private final static int gridXMargin = 20;
+	private final static int gridYMargin = 20;
+	
+	private final static int cellSize = 30;
+	private final static int cellDistance = 30;
 	
 	// Temporary
 	
@@ -55,13 +38,13 @@ public class Sudoku {
 	
 	public static void main(String[] args) {
 		
-		GUI = new SudokuGUI(gridSize, gridXMargin, 2 * gridYMargin, emlementSize, elementDistance, gridXMargin * 2 + gridSize * elementDistance, gridYMargin * 2 + (gridSize + 3) * elementDistance);
+		GUI = new SudokuGUI(gridXMargin, 2 * gridYMargin, cellSize, cellDistance, gridXMargin * 2 + gridSize * cellDistance, gridYMargin * 2 + (gridSize + 3) * cellDistance);
 		
-		GUI.add(buildSolveButton(gridXMargin, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
+		GUI.add(buildSolveButton(gridXMargin, 3 * gridYMargin + gridSize * cellDistance, 2 * cellDistance, cellSize));
 		
-		GUI.add(buildResetButton(gridXMargin + 2 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
+		GUI.add(buildResetButton(gridXMargin + 2 * cellDistance, 3 * gridYMargin + gridSize * cellDistance, 2 * cellDistance, cellSize));
 		
-		GUI.add(buildGenerateButton(gridXMargin + 4 * elementDistance, 3 * gridYMargin + gridSize * elementDistance, 2 * elementDistance, emlementSize));
+		GUI.add(buildGenerateButton(gridXMargin + 4 * cellDistance, 3 * gridYMargin + gridSize * cellDistance, 2 * cellDistance, cellSize));
 	}
 	
 	static void solveSudoku(Cell[][] sheet) {
@@ -72,25 +55,6 @@ public class Sudoku {
 	}
 	
 	// Temporary functions
-	
-	static void printSudoku(int[][] sheet) {
-		
-		/*
-		 * Temporary function for debugging.
-		 * The function prints a sheet to the console.
-		 */
-		
-		for(int[] column : sheet) {
-			
-			System.out.println();
-			
-			for(int value : column) {
-				
-				System.out.print(value + "");
-				
-			}
-		}
-	}
 	
 	static Cell[][] getHardCodedSheet() {
 		

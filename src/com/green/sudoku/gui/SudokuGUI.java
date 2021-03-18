@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.green.sudoku.Cell;
+import com.green.sudoku.Sudoku;
 import com.green.sudoku.math.ArrayLooper2D;
 
 @SuppressWarnings("serial")
@@ -20,9 +21,9 @@ public class SudokuGUI extends Frame{
 	
 	CellGUI[][] cellGrid;
 	
-	public SudokuGUI(int gridSize, int x, int y, int emlementSize, int elementDistance, int xSize, int ySize) {
+	public SudokuGUI(int xPos, int yPos, int emlementSize, int elementDistance, int xSize, int ySize) {
 		
-		this.size = gridSize;
+		this.size = Sudoku.gridSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(this.size);
 		
@@ -30,9 +31,12 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			cellGrid[a.getY(i)][a.getX(i)] = new CellGUI(x + a.getX(i) * elementDistance, y + a.getY(i) * elementDistance, emlementSize, a.getX(i), a.getY(i));
+			int x = a.getX(i);
+			int y = a.getY(i);
 			
-			add(cellGrid[a.getY(i)][a.getX(i)]);
+			cellGrid[y][x] = new CellGUI(xPos + x * elementDistance, yPos + y * elementDistance, emlementSize, x, y);
+			
+			add(cellGrid[y][x]);
 		}
 		
 		// Makes the window close when pressing "x"
@@ -43,7 +47,7 @@ public class SudokuGUI extends Frame{
         });  
 			
 		this.setSize(xSize, ySize);
-				
+		
 		this.setLayout(null);
 				
 		this.setVisible(true);
@@ -58,9 +62,11 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			this.cellGrid[a.getY(i)][a.getX(i)].num = cells[a.getY(i)][a.getX(i)].value;
+			int x = a.getX(i);
+			int y = a.getY(i);
 			
-			this.cellGrid[a.getY(i)][a.getX(i)].setLabel(this.cellGrid[a.getY(i)][a.getX(i)].num);
+			this.cellGrid[y][x].value = cells[y][x].value;
+			this.cellGrid[y][x].setLabel(this.cellGrid[y][x].value);
 		}
 	}
 	
@@ -70,8 +76,11 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			this.cellGrid[a.getY(i)][a.getX(i)].num = 0;
-			this.cellGrid[a.getY(i)][a.getX(i)].setLabel(cellGrid[a.getY(i)][a.getX(i)].num);
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			this.cellGrid[y][x].value = 0;
+			this.cellGrid[y][x].setLabel(cellGrid[y][x].value);
 			
 		}
 	}
@@ -84,9 +93,11 @@ public class SudokuGUI extends Frame{
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
-			result [a.getY(i)][a.getX(i)] = this.cellGrid[a.getY(i)][a.getX(i)].getCell();
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			result[y][x] = this.cellGrid[y][x].getCell();
 		}
-		
 		return result;
 	}
 	

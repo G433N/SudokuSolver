@@ -7,17 +7,17 @@ import com.green.sudoku.Cell;
 @SuppressWarnings("serial")
 public class CellGUI extends Button{
 
-	public int num;
+	public int value;
 	private int x;
 	private int y;
 	
 	public CellGUI(int xPos, int yPos, int size, int x, int y) {
 		
-		this.num = 0;
+		this.value = 0;
 		this.x = x;
 		this.y = y;
 		
-		this.setLabel(num);
+		this.setLabel(value);
 		
 		this.setBounds(xPos, yPos, size, size);
 		
@@ -26,11 +26,11 @@ public class CellGUI extends Button{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-					num++;
+					value++;
 					
-					if (num == 10) num = 0;
+					if (value == 10) value = 0;
 					
-					setLabel(num);
+					setLabel(value);
 				}
 			}
 		);
@@ -43,6 +43,6 @@ public class CellGUI extends Button{
 	}
 	
 	public Cell getCell() {
-		return new Cell(this.num, this.x, this.y);
+		return new Cell(this.value, this.x, this.y);
 	}
 }
