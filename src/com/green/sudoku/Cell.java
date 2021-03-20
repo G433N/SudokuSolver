@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 //Class for storage of possible values and if the cell is solved
 public class Cell {
-	// store x and y too
+	
 	public int value;
 	public int x;
 	public int y;

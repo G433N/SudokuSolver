@@ -4,15 +4,11 @@ import com.green.sudoku.math.ArrayLooper2D;
 
 public class SudokuSolver { // 
 	
-	final int sheetSize;
-	final int boxSize; 
 	Cell[][] cells;
 	Cell[][] cellsCopy;
 	
 	public SudokuSolver(Cell[][] sheet) {
 		
-		this.sheetSize = Sudoku.gridSize;
-		this.boxSize = Sudoku.boxSize;
 		this.cells = sheet;
 		
 		this.sheetSetUp();
@@ -22,7 +18,7 @@ public class SudokuSolver { //
 	
 	public void solve() {
 		
-		final int size = this.sheetSize;
+		final int size = Sudoku.gridSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		
@@ -108,7 +104,7 @@ public class SudokuSolver { //
 	
 	private Cell[] getRow(int y) { // Takes in parameter x and returns an array with
 		
-		final int size = this.sheetSize;
+		final int size = Sudoku.gridSize;
 		
 		Cell[] result = new Cell[size];
 		
@@ -119,7 +115,7 @@ public class SudokuSolver { //
 	
 	private Cell[] getColumn(int x) {
 		
-		final int size = this.sheetSize;
+		final int size = Sudoku.gridSize;
 		
 		Cell[] result = new Cell[size];
 		
@@ -135,7 +131,7 @@ public class SudokuSolver { //
 		x = 3 * (x - 1);
 		y = 3 * (y - 1);
 		
-		final int size = this.boxSize;
+		final int size = Sudoku.boxSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		
@@ -152,7 +148,7 @@ public class SudokuSolver { //
 	
 	private Cell[][] getCellsCopy() {
 		
-		final int size = this.sheetSize;
+		final int size = Sudoku.gridSize;
 		
 		Cell[][] result = new Cell[size][size];
 		
@@ -160,7 +156,10 @@ public class SudokuSolver { //
 		
 		for (int i = 1; i <= a.getMax(); ++i) {
 			
-			result[a.getY(i)][a.getX(i)] = new Cell(this.cells[a.getY(i)][a.getX(i)]);
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			result[y][x] = new Cell(this.cells[y][x]);
 			
 		}
 		
@@ -169,7 +168,7 @@ public class SudokuSolver { //
 	
 	private void sheetSetUp() {
 		
-		final int size = this.sheetSize;
+		final int size = Sudoku.gridSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		

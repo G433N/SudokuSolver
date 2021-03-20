@@ -17,17 +17,15 @@ public class SudokuGUI extends Frame{
 	 * The sheet is stored as an CellGUI[][]
 	 */
 	
-	final int size;
-	
 	CellGUI[][] cellGrid;
 	
 	public SudokuGUI(int xPos, int yPos, int emlementSize, int elementDistance, int xSize, int ySize) {
 		
-		this.size = Sudoku.gridSize;
+		final int size = Sudoku.gridSize;
 		
-		ArrayLooper2D a = new ArrayLooper2D(this.size);
+		ArrayLooper2D a = new ArrayLooper2D(size);
 		
-		cellGrid = new CellGUI[this.size][this.size];
+		cellGrid = new CellGUI[size][size];
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
@@ -58,7 +56,9 @@ public class SudokuGUI extends Frame{
 	
 	public void setSheet(Cell[][] cells) {
 		
-		ArrayLooper2D a = new ArrayLooper2D(this.size);
+		final int size = Sudoku.gridSize;
+		
+		ArrayLooper2D a = new ArrayLooper2D(size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
@@ -72,7 +72,9 @@ public class SudokuGUI extends Frame{
 	
 	public void resetSheet() {
 		
-		ArrayLooper2D a = new ArrayLooper2D(this.size);
+		final int size = Sudoku.gridSize;
+		
+		ArrayLooper2D a = new ArrayLooper2D(size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
@@ -87,9 +89,11 @@ public class SudokuGUI extends Frame{
 	
 	public Cell[][] getSheet() { 
 		
-		Cell[][] result = new Cell[this.size][size];
+		final int size = Sudoku.gridSize;
 		
-		ArrayLooper2D a = new ArrayLooper2D(this.size);
+		Cell[][] result = new Cell[size][size];
+		
+		ArrayLooper2D a = new ArrayLooper2D(size);
 		
 		for (int i = 1; i <= a.getMax(); i++) {
 			
