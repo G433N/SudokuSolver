@@ -16,6 +16,8 @@ public class Cell {
 		this.value = value;
 		this.possiblities = new ArrayList<>();
 		this.solved = false;
+		this.x = x;
+		this.y = y;
 		
 		for(int i = 1; i <= Sudoku.gridSize; i++) possiblities.add(i);
 	}
@@ -25,5 +27,16 @@ public class Cell {
 		this.value = cell.value;
 		this.possiblities = (ArrayList<Integer>) cell.possiblities.clone();
 		this.solved = cell.solved;
+		this.x = cell.x;
+		this.y = cell.y;
+	}
+	
+	public void updateSolved() { // TODO Change Name
+		
+		if (this.possiblities.size() == 1) {
+			
+			this.solved = true;
+			this.value = this.possiblities.get(0);
+		}
 	}
 }

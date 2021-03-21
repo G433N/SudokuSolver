@@ -11,24 +11,30 @@ public class SudokuSolver { //
 		
 		this.cells = sheet;
 		
-		this.sheetSetUp();
+		this.initSheet();
 		
 		this.cellsCopy = this.getCellsCopy();
 	}
 	
 	public void solve() {
 		
+		this.updateAllValues();
+		
+	}
+	
+	private void updateAllValues() {
+		
 		final int size = Sudoku.gridSize;
 		
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		
-		boolean solving = false;
+		boolean solving = true;
 		boolean solved = true;
 		int maxLoops = 1000;
 		int loops = 0;
 		
 		
-		while (!solving && loops < maxLoops) {
+		while (solving && loops < maxLoops) {
 			
 			solved = true;
 			
@@ -46,63 +52,81 @@ public class SudokuSolver { //
 					solved = false;
 				}
 				
-				if (cell.possiblities.size() == 1) {
-					cell.solved = true;
-					cell.value = cell.possiblities.get(0);
-				}
-				this.removeImpossibleValuesFromPoint(x, y);
+				cell.updateSolved();
+				this.updatePossiblities(cell);
 			}
 			
-			if (solved) solving = true;
+			if (solved) solving = false;
 			loops++;
 		}
+		
+		Cell temp = this.getFirstEmptyCell();
+		
+		System.out.println("X : " + temp.x + " Y : " + temp.y);
+		System.out.println(temp.possiblities);
+		
 	}
 	
 	public Cell[][] getResult() {
 		return this.cells;
 	}
 	
- 	private void removeImpossibleValuesFromPoint(int x, int y) { // TODO Change name and take cell input
+ 	private void updatePossiblities(Cell cell) { // TODO Change name
  		
- 		Cell cell = cells[y][x];
+ 		int value = cell.value;
+ 		int x = cell.x;
+ 		int y = cell.y;
  		
-		if (cell.value == 0) return;
+		if (value == 0) return;
 		
 		for (Cell c : this.getRow(y)) {
 			
-			int index = c.possiblities.indexOf(cell.value);
+			int index = c.possiblities.indexOf(value);
 			
 			if (index != -1) {
 				
 				c.possiblities.remove(index);
-				
 			}
 		}
 		
 		for (Cell c : this.getColumn(x)) {
 			
-			int index = c.possiblities.indexOf(cell.value);
+			int index = c.possiblities.indexOf(value);
 			
 			if (index != -1) {
 				
 				c.possiblities.remove(index);
-				
 			}
 		}
 		
 		for (Cell c : this.getBox(x, y)) {
 			
-			int index = c.possiblities.indexOf(cell.value);
+			int index = c.possiblities.indexOf(value);
 			
 			if (index != -1) {
 				
 				c.possiblities.remove(index);
-				
 			}
 		}
 	}
 	
-	private Cell[] getRow(int y) { // Takes in parameter x and returns an array with
+ 	private Cell getFirstEmptyCell() {
+ 		
+		final int size = Sudoku.gridSize;
+			
+		ArrayLooper2D a = new ArrayLooper2D(size);
+		
+		for (int i = 1; i <= a.getMax(); i++) {
+			
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			if (cells[y][x].value == 0) return cells[y][x];
+		}
+		return null;
+ 	}
+ 	
+ 	private Cell[] getRow(int y) { // Takes in parameter x and returns an array with
 		
 		final int size = Sudoku.gridSize;
 		
@@ -141,9 +165,7 @@ public class SudokuSolver { //
 			
 			result[i - 1] = this.cells[y + a.getY(i)][x + a.getX(i)];
 		}
-		
 		return result;
-		
 	}
 	
 	private Cell[][] getCellsCopy() {
@@ -160,13 +182,11 @@ public class SudokuSolver { //
 			int y = a.getY(i);
 			
 			result[y][x] = new Cell(this.cells[y][x]);
-			
 		}
-		
 		return result;
 	}
 	
-	private void sheetSetUp() {
+	private void initSheet() {
 		
 		final int size = Sudoku.gridSize;
 		
@@ -181,7 +201,7 @@ public class SudokuSolver { //
 			
 			if (cell.value != 0) cell.solved = true;
 			
-			this.removeImpossibleValuesFromPoint(x ,y);
+			this.updatePossiblities(cell);
 		}
 	}
 }
