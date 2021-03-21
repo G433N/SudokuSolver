@@ -30,13 +30,4 @@ public class Cell {
 		this.x = cell.x;
 		this.y = cell.y;
 	}
-	
-	public void updateSolved() { // TODO Change Name
-		
-		if (this.possiblities.size() == 1) {
-			
-			this.solved = true;
-			this.value = this.possiblities.get(0);
-		}
-	}
 }

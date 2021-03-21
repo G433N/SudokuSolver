@@ -11,34 +11,41 @@ import com.green.sudoku.math.ArrayLooper2D;
 public class SudokuSolver {
 	
 	Cell[][] cells;
-	Cell[][] cellsCopy;
+	LogBook logBook;
 	
 	public SudokuSolver(Cell[][] sheet) {
 		
 		this.cells = sheet;
-		
+		this.logBook = new LogBook();
 		this.initSheet();
-		
-		this.cellsCopy = this.getCellsCopy();
 	}
 	
 	public void solve() {
 		
 		while (true) {
-			this.cellsCopy = this.getCellsCopy();
-			
 			Cell cell = this.getFirstEmptyCell();
 			
-			if (cell == null) return; // Solved
-			
-			if (cell.possiblities.size() == 0) {
-				System.out.println("Error");
+			if (cell == null) {
+				this.logBook.addLog(-1, -1, -1, -1, "Solved");
 				return;
 			}
 			
-			cell.value = cell.possiblities.get(0);
+			int x = cell.x;
+			int y = cell.y;
+			int oldValue = cell.value;
+
+			if (cell.possiblities.size() == 0) {
+				this.logBook.addLog(x, y, oldValue, -1, "solve() Error Failed Brute Force Solving");
+				return;
+			}
 			
-			this.updateAllValues();
+			int newValue = cell.possiblities.get(0);
+			
+			cell.value = newValue;
+			
+			this.logBook.addLog(x, y, oldValue, newValue, "solve() Lowest possible value");
+			
+			this.updateCells();
 		}
 		/*
 		Cell temp1 = this.getFirstEmptyCell();
@@ -50,7 +57,17 @@ public class SudokuSolver {
 		*/
 	}
 	
-	private void updateAllValues() {
+	public void printLog() {
+		
+		this.logBook.printAll();
+	}
+	
+	public void writeLog() {
+		
+		this.logBook.writeAllToFile();
+	}
+	
+	private void updateCells() {
 		
 		final int size = Sudoku.gridSize;
 		
@@ -80,7 +97,7 @@ public class SudokuSolver {
 					solved = false;
 				}
 				
-				cell.updateSolved();
+				this.updateCell(cell);
 				this.updatePossiblities(cell);
 			}
 			
@@ -91,6 +108,22 @@ public class SudokuSolver {
 	
 	public Cell[][] getResult() {
 		return this.cells;
+	}
+	
+	public void updateCell(Cell cell) { // TODO Change Name
+		
+		if (cell.possiblities.size() == 1) {
+			
+			int x = cell.x;
+			int y = cell.y;
+			int oldValue = cell.value;
+			int newValue = cell.possiblities.get(0);
+			
+			cell.solved = true;
+			cell.value = newValue;
+			
+			this.logBook.addLog(x, y, oldValue, newValue, "updateCell() Stadard Solving");
+		}
 	}
 	
  	private void updatePossiblities(Cell cell) { // TODO Change name
@@ -105,30 +138,21 @@ public class SudokuSolver {
 			
 			int index = c.possiblities.indexOf(value);
 			
-			if (index != -1) {
-				
-				c.possiblities.remove(index);
-			}
+			if (index != -1) c.possiblities.remove(index);
 		}
 		
 		for (Cell c : this.getColumn(x)) {
 			
 			int index = c.possiblities.indexOf(value);
 			
-			if (index != -1) {
-				
-				c.possiblities.remove(index);
-			}
+			if (index != -1) c.possiblities.remove(index);
 		}
 		
 		for (Cell c : this.getBox(x, y)) {
 			
 			int index = c.possiblities.indexOf(value);
 			
-			if (index != -1) {
-				
-				c.possiblities.remove(index);
-			}
+			if (index != -1) c.possiblities.remove(index);
 		}
 	}
 	
@@ -194,6 +218,7 @@ public class SudokuSolver {
 		return result;
 	}
 	
+	@SuppressWarnings("unused")
 	private Cell[][] getCellsCopy() {
 		
 		final int size = Sudoku.gridSize;
@@ -230,6 +255,6 @@ public class SudokuSolver {
 			this.updatePossiblities(cell);
 		}
 		
-		this.updateAllValues();
+		this.updateCells();
 	}
 }

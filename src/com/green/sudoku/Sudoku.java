@@ -49,9 +49,10 @@ public class Sudoku {
 	
 	static void solveSudoku(Cell[][] sheet) {
 		
-		SudokuSolver sudokuBruteSolver = new SudokuSolver(sheet);
-		sudokuBruteSolver.solve();
-		GUI.setSheet(sudokuBruteSolver.getResult());
+		SudokuSolver sudoku = new SudokuSolver(sheet);
+		sudoku.solve();
+		GUI.setSheet(sudoku.getResult());
+		sudoku.writeLog();
 	}
 	
 	// Temporary functions
