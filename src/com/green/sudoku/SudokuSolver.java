@@ -2,7 +2,13 @@ package com.green.sudoku;
 
 import com.green.sudoku.math.ArrayLooper2D;
 
-public class SudokuSolver { // 
+	/*
+	 * TODO Log all move
+	 * TODO Backtracking
+	 * TODO Solve Sudoku
+	 */
+		
+public class SudokuSolver {
 	
 	Cell[][] cells;
 	Cell[][] cellsCopy;
@@ -18,8 +24,30 @@ public class SudokuSolver { //
 	
 	public void solve() {
 		
-		this.updateAllValues();
+		while (true) {
+			this.cellsCopy = this.getCellsCopy();
+			
+			Cell cell = this.getFirstEmptyCell();
+			
+			if (cell == null) return; // Solved
+			
+			if (cell.possiblities.size() == 0) {
+				System.out.println("Error");
+				return;
+			}
+			
+			cell.value = cell.possiblities.get(0);
+			
+			this.updateAllValues();
+		}
+		/*
+		Cell temp1 = this.getFirstEmptyCell();
+		Cell temp2 = this.getFirstEmptyCell(this.cellsCopy);
 		
+		System.out.println("X : " + temp1.x + " Y : " + temp1.y);
+		System.out.println("X : " + temp2.x + " Y : " + temp2.y);
+		System.out.println(temp1.possiblities);
+		*/
 	}
 	
 	private void updateAllValues() {
@@ -59,12 +87,6 @@ public class SudokuSolver { //
 			if (solved) solving = false;
 			loops++;
 		}
-		
-		Cell temp = this.getFirstEmptyCell();
-		
-		System.out.println("X : " + temp.x + " Y : " + temp.y);
-		System.out.println(temp.possiblities);
-		
 	}
 	
 	public Cell[][] getResult() {
@@ -110,7 +132,7 @@ public class SudokuSolver { //
 		}
 	}
 	
- 	private Cell getFirstEmptyCell() {
+ 	private Cell getFirstEmptyCell(Cell[][] cells) {
  		
 		final int size = Sudoku.gridSize;
 			
@@ -124,6 +146,10 @@ public class SudokuSolver { //
 			if (cells[y][x].value == 0) return cells[y][x];
 		}
 		return null;
+ 	}
+ 	
+ 	private Cell getFirstEmptyCell() {
+ 		return this.getFirstEmptyCell(this.cells);
  	}
  	
  	private Cell[] getRow(int y) { // Takes in parameter x and returns an array with
@@ -203,5 +229,7 @@ public class SudokuSolver { //
 			
 			this.updatePossiblities(cell);
 		}
+		
+		this.updateAllValues();
 	}
 }

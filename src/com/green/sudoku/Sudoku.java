@@ -62,8 +62,13 @@ public class Sudoku {
 		ArrayLooper2D a = new ArrayLooper2D(size);
 		Cell[][] result = new Cell[size][size];
 		
-		for (int i = 1; i <= a.getMax(); i++) result[a.getY(i)][a.getX(i)] = new Cell(hardCodedSheet[a.getY(i)][a.getX(i)], a.getX(i), a.getY(i));
-		
+		for (int i = 1; i <= a.getMax(); i++) {
+			
+			int x = a.getX(i);
+			int y = a.getY(i);
+			
+			result[y][x] = new Cell(hardCodedSheet[y][x], x, y);
+		}
 		return result;
 	}
 	
